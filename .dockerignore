@@ -1,0 +1,5 @@
+storage/nginx
+storage/mysql
+.git
+.idea
+vendor
