@@ -40,21 +40,19 @@ build:
 	@docker-compose build
 
 phpunit-test:
+	@make prepare-db-for-test
 	@make exec-bash cmd="./vendor/bin/phpunit -c phpunit.xml"
+
+prepare-db-for-test:
+	@docker-compose exec mysql mysql -u root -p$(mysql_pass) -e "DROP DATABASE IF EXISTS lara_testing"
+	@docker-compose exec mysql mysqladmin -u root -p$(mysql_pass) create lara_testing
+	@make exec cmd="php artisan migrate --env=testing"
 
 composer-install:
 	@make exec cmd="composer install --optimize-autoloader --no-interaction --no-progress"
 
 create-mysql-db:
 	@docker-compose exec mysql mysqladmin -u root -p$(mysql_pass) create lara_docker
-	@docker-compose exec mysql mysqladmin -u root -p$(mysql_pass) create lara_testing
-
-migrate-all:
-	@make migrate
-	@make exec cmd="php artisan migrate --env=testing"
 
 migrate:
 	@make exec cmd="php artisan migrate"
-
-
-#@docker-compose exec -u www-data php composer install --composer install --optimize-autoloader --no-interaction --no-progress
