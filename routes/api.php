@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

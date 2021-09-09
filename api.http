@@ -1,0 +1,30 @@
+GET http://localhost:8000/api/health-check
+
+###
+GET http://localhost:8000/api/posts
+
+###
+POST http://localhost:8000/api/posts
+Content-Type: application/json
+
+{
+    "title": "First Post",
+    "content": "Some Content"
+}
+
+###
+GET http://localhost:8000/api/posts/10
+
+
+###
+PUT http://localhost:8000/api/posts/1
+Content-Type: application/json
+
+{
+    "title": "First Post Changed",
+    "content": "Some Content Changed"
+}
+
+
+###
+DELETE http://localhost:8000/api/posts/1
